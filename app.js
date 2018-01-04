@@ -15,6 +15,7 @@ var stylus = require('stylus');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
+var twitter = require('./routes/twitter')
 
 var app = express();
 
@@ -41,6 +42,7 @@ app.get('/a/b/', function (req, res) {
   res.send("Hello A and B");
 });
 
+app.use('/twittertest', twitter)
 app.use('/users', users);
 app.use('/', index);
 
