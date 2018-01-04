@@ -1,3 +1,10 @@
+/*
+The main file of our app, the starting point.
+Set up imports of important files like Express,
+routing files, which link possible choices under a subdirectory (like contact under <root>, etc.),
+and error handling of bad requests.
+*/
+
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -24,8 +31,18 @@ app.use(cookieParser());
 app.use(stylus.middleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
+//These link to the routing files, which clean up the code
+//by separating the possible choices into the appropriate files (/routes/*.js)
+app.get('/users/:userId/books/:bookId', function (req, res) {
+  res.send(req.params)
+});
+
+app.get('/a/b/', function (req, res) {
+  res.send("Hello A and B");
+});
+
 app.use('/users', users);
+app.use('/', index);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
