@@ -7,21 +7,26 @@ html
 
   body
     header
-      nav(class="navbar navbar-intro navbar-fixed-top navie navbar-fixed-side navbar-fixed-side-left")
+      nav(class="navbar navbar-intro navbar-fixed-top navie navbar-fixed-side navbar-fixed-side-left navbar-toggleable-md")
         div(class="container")
-          div(class="navbar-header")
-            ul(class="nav navbar-nav")
-              li
-                a(href="/") Home
-              li
-                a(href="/about") About
-              li
-                a(href="/contact") Contact
+          li
+            a(href="/") Home
+          li
+            a(href="/about") About
+          li
+            a(href="/contact") Contact
     section#wrapper
         block content
         footer
           p Hello, this is a Node/Express server, work in progress. One day, this will be my portfolio website.
+          p For now, visit #[a(href="https://dantetam.github.io/") my current portfolio].
         img(src="/images/sf_panorama.jpg")
+
+        br
+        p
+          | #[a(href="https://github.com/dantetam") GitHub] &emsp;
+          | #[a(href="https://dantetam.github.io/src/projects") Projects] &emsp;
+          | #[a(href="https://dantetam.github.io/src/Dante_Tam_Jan_2018_Resume.pdf") Resume]
     script(src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js")
     script(src="/js/bootstrap.js")
     script(src="/js/bootstrap.bundle.js")
