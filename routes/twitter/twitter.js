@@ -39,7 +39,7 @@ Use the previously found bearer token to OAuth into Twitter's tweet search API,
 function getTweets(res, bearerToken, userTopic) {
   var url = 'https://api.twitter.com/1.1/search/tweets.json';
   request({
-    url: url + "?q=" + userTopic + "&count=50&lang=en&result_type=popular",
+    url: url + "?q=" + userTopic + "&count=50&lang=en&result_type=mixed",
     method: 'GET',
     headers: {
       "Authorization": "Bearer " + bearerToken,
@@ -50,7 +50,7 @@ function getTweets(res, bearerToken, userTopic) {
     tweetStrings = parseTweets(body);
     //tweetStrings = tweetStrings.join("\n");
 
-    console.log(twitterAnalysis.foo(2, 3));
+    wordCounts = twitterAnalysis.getWordCountFromTweets(tweetStrings);
 
     res.render('twitter', { //Only render the website when we are finished writing to it
       title: 'Twitter Feed',
