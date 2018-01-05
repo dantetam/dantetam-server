@@ -4,7 +4,11 @@ var router = express.Router();
 var request = require("request");
 var auth_keys = require('./twitter_auth.json');
 
-function findBearerToken(res, topic) {
+/*
+Read API keys from the hidden file, generate a bearer token from Twitter's OAuth endpoint,
+and then start another callback.
+*/
+function findBearerToken(res, userTopic) {
   var key = auth_keys.consumer_key;
   var secret = auth_keys.consumer_secret;
   var cat = key + ":" + secret;
@@ -23,47 +27,54 @@ function findBearerToken(res, topic) {
     body: "grant_type=client_credentials"
   }, function(err, resp, body) {
     //console.log(body["access_token"]);
-    getTweets(body["access_token"], topic);
+    getTweets(res, body["access_token"], userTopic);
   });
 }
 
-function getTweets(bearerToken, topic) {
+/*
+Use the previously found bearer token to OAuth into Twitter's tweet search API,
+*/
+function getTweets(res, bearerToken, userTopic) {
   var url = 'https://api.twitter.com/1.1/search/tweets.json';
-  console.log(">>>Bearer " + bearerToken + '<<<');
   request({
-    url: url + "?q=" + topic,
+    url: url + "?q=" + userTopic + "&count=50&lang=en&result_type=popular",
     method: 'GET',
     headers: {
       "Authorization": "Bearer " + bearerToken,
       "Content-Type": "application/json"
     },
     json: true
-  }, function(err, resp, body) {
-    console.log("Done");
-    parseTweets(body);
+  }, function(err, jsonResponse, body) {
+    tweetStrings = parseTweets(body);
+    //tweetStrings = tweetStrings.join("\n");
+
+    res.render('twitter', { //Only render the website when we are finished writing to it
+      title: 'Twitter Feed',
+      topic: userTopic,
+      tweets: tweetStrings
+    });
   });
 }
 
 function parseTweets(tweetsJson) {
   results = []
-  console.log(tweetsJson["statuses"]);
+  statuses = tweetsJson["statuses"];
   for (var i = 0; i < statuses.length; i++) {
     var status = statuses[i];
     results.push(status["user"]["name"] + ": " + status["text"]);
   }
-  console.log(results[0]);
+  return results;
 }
 
-/* GET home page. */
+/* This callback happens when the user creates the requests
+GET /twittertest/:topic
+where :topic is a kind of "wildcard"
+i.e. it catches /twittertest/California
+ */
 router.get('/:topic', function(req, res) {
   userTopic = req.params["topic"];
-  res.render('twitter', {
-    title: 'Twitter Feed',
-    topic: userTopic
-  });
 
   findBearerToken(res, userTopic);
-
 });
 
 module.exports = router;
