@@ -14,7 +14,6 @@ var bodyParser = require('body-parser');
 var stylus = require('stylus');
 
 var index = require('./routes/index');
-var users = require('./routes/users');
 var twitter = require('./routes/twitter/twitter');
 
 var app = express();
@@ -34,16 +33,15 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //These link to the routing files, which clean up the code
 //by separating the possible choices into the appropriate files (/routes/*.js)
-app.get('/users/:userId/books/:bookId', function (req, res) {
+/*app.get('/users/:userId/books/:bookId', function (req, res) {
   res.send(req.params)
-});
+});*/
 
 app.get('/a/b/', function (req, res) {
   res.send("Hello A and B");
 });
 
 app.use('/twitter', twitter)
-app.use('/users', users);
 app.use('/', index);
 
 // catch 404 and forward to error handler
