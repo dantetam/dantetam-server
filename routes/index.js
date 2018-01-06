@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var fs = require('fs');
 
 /* GET home page. */
 router.get('/', function(req, res){
@@ -21,7 +22,13 @@ router.get('/education', function(req, res){
 });
 
 router.get('/resume', function(req, res){
-  res.render('resume', {});
+  //From https://stackoverflow.com/questions/11598274/display-pdf-in-browser-using-express-js
+  var stream = fs.createReadStream('./public/materials/Dante_Tam_Jan_2018_Resume.pdf');
+  var filename = "Dante_Tam_Jan_2018_Resume.pdf";
+  filename = encodeURIComponent(filename);
+  res.setHeader('Content-disposition', 'inline; filename="' + filename + '"');
+  res.setHeader('Content-type', 'application/pdf');
+  stream.pipe(res);
 });
 
 router.get('/experiments', function(req, res){

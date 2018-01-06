@@ -13,6 +13,7 @@
     "fs": "0.0.1-security",
     "jade": "~1.11.0",
     "morgan": "~1.9.0",
+    "node-webgl": "^0.5.5",
     "request": "^2.83.0",
     "serve-favicon": "~2.4.5",
     "stylus": "0.54.5"

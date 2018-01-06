@@ -15,6 +15,7 @@ var stylus = require('stylus');
 
 var index = require('./routes/index');
 var twitter = require('./routes/twitter/twitter');
+var stargalaxy = require('./routes/stargalaxy/index')
 
 var app = express();
 
@@ -41,7 +42,8 @@ app.get('/a/b/', function (req, res) {
   res.send("Hello A and B");
 });
 
-app.use('/twitter', twitter)
+app.use('/stargalaxy', stargalaxy);
+app.use('/twitter', twitter);
 app.use('/', index);
 
 // catch 404 and forward to error handler
