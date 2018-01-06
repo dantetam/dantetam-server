@@ -11,6 +11,15 @@ img {
 li {
   list-style: none;
 }
+ul li {
+  padding: 5px;
+}
+.navbar {
+  background-color: #add8e6;
+}
+li a {
+  color: #000;
+}
 #wrapper {
   margin-left: 10%;
   margin-right: 10%;

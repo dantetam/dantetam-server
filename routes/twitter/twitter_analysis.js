@@ -17,8 +17,8 @@ var self = module.exports = {
     var tweetSplitHashtags = tweet.replace(/(\#)([a-zA-Z]+)/g, function(match, group1, group2, index, original) {
       return self.camelCaseSeparate(group2);
     });
-    console.log(tweetSplitHashtags);
 
+    //Once hashtags are processed, remove all non-alphanumeric characters, change to lowercase, and split by whitespace
     var tokens = tweetSplitHashtags.toLowerCase().replace(/[^a-zA-Z ]/g, "").split(/[ ,]+/);
     //Go backwards since we are removing elements, arraylist trap
     for (var i = tokens.length - 1; i >= 0; i--) {
@@ -44,7 +44,7 @@ var self = module.exports = {
   /*
   Takes in an array of an array of tokens, and returns a word count dictionary
   */
-  wordCount: function(doubleArrTokens, cutoffCountInc = 2) {
+  wordCount: function(doubleArrTokens, cutoffCountInc = 5) {
     var results = {};
     for (var i = 0; i < doubleArrTokens.length; i++) {
       var listTokens = doubleArrTokens[i];

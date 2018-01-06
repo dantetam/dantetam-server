@@ -9,20 +9,36 @@ html
     header
       nav(class="navbar navbar-intro navbar-fixed-top navie navbar-fixed-side navbar-fixed-side-left navbar-toggleable-md")
         div(class="container")
+          li(class="dropdown")
+            a(href="/#" class="dropdown-toggle" data-toggle="dropdown" role="button") @dantetam
+            ul(class="dropdown-menu")
+              li
+                a(href="https://github.com/dantetam" target="_blank") GitHub
+              li 
+                a(href="/materials/Dante_Tam_Jan_2018_Resume.pdf" target="_blank") Resume
+              li
+                a(href="mailto:dante.tam1@gmail.com" target="_blank") E-mail
+              li
+                a(href="https://linkedin.com/in/daptam" target="_blank") LinkedIn
           li
-            a(href="/") Home
+            a(href="/") Dante Tam
           li
-            a(href="/about") About
+            a(href="/projects") Projects
           li
-            a(href="/contact") Contact
+            a(href="/design") Design
+          li
+            a(href="/education") Education
+          li
+            a(href="/resume") Resume
+          li
+            a(href="/experiments") Experiments
+          li
+            a(href="/literature") Literature
+              
     section#wrapper
       block content
-      br
-      br
-      p
-        | #[a(href="https://github.com/dantetam") GitHub] &emsp;
-        | #[a(href="https://dantetam.github.io/src/projects") Projects] &emsp;
-        | #[a(href="https://dantetam.github.io/src/Dante_Tam_Jan_2018_Resume.pdf") Resume]
-    script(src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js")
+      
+    script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js")
+    //script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js")
     script(src="/js/bootstrap.js")
     script(src="/js/bootstrap.bundle.js")
